@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="#">Gestion produit</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{path('product_index')}}">Liste produits </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{path('product_create')}}">Nouveau produit</a>
+      </li>
+      
+    </ul>
+    
+  </div>
+</nav>
+
+<main role="main" class="container">
+
+  <div class="starter-template">
+    <div class="row">
+      <div class="col-12">
+        <table class="table ">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>name</th>
+              <th>description</th>
+              <th>price</th>
+              <th>options</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for product in products  %}
+                <tr>
+                  <td>
+                    <a href="{{path('product_show', {'id': product.id})}}">
+                      {{product.id}}
+                    </a>
+                  </td>
+                  <td>{{product.name}}</td>
+                  <td>{{product.description}}</td>
+                  <td>{{product.price}}</td>
+                  <td>
+                    <a href="{{path('product_update', {'id':product.id })}}">Modifier</a> | 
+                    <a href="{{path('product_remove', {'id': product.id})}}">Supprimer</a>
+                  </td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+{% endblock %}
